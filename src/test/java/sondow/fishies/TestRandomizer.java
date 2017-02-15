@@ -26,7 +26,6 @@ public class TestRandomizer extends Randomizer {
 	 */
 	@Override
 	public int nextInt(int bound) {
-		System.out.println("nextInt running");
 		return results.poll();
 	}
 

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class AquariumBuilderTest {
 
 	@Test
-	public void testBuildSimpleAquariums() {
+	public void testBuildSimpleAquarium() {
 
 		List<Integer> values = Arrays.asList(2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
 		Randomizer random = new TestRandomizer(values);
