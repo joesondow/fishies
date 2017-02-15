@@ -16,8 +16,9 @@ public class LambdaRequestHandler implements RequestHandler<Object, Object> {
 	 * @see com.amazonaws.services.lambda.runtime.RequestHandler#handleRequest(java.lang.Object, com.amazonaws.services.lambda.runtime.Context)
 	 */
 	public Object handleRequest(Object input, Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		AquariumBuilder builder = new AquariumBuilder();
+		Tweeter tweeter = new Tweeter();
+		return tweeter.tweet(builder.build());
 	}
 
 }
