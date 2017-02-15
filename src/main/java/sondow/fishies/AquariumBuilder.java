@@ -30,7 +30,7 @@ public class AquariumBuilder {
 		return (a < b) ? a : b;
 	}
 	
-	private int lowFavoringRandom(int upperBound, Randomizer random) {
+	private int lowFavoringRandom(int upperBound) {
 		int a = random.nextInt(upperBound);
 		int b = random.nextInt(upperBound);
 		return lower(a, b);
@@ -50,9 +50,6 @@ public class AquariumBuilder {
 		
 		// 140 char budget
 
-		// Build the bottom first, so you know how many characters you can spend
-		// on swimmers.
-
 		// There will be about 8 tweets a day. Something should be special about many
 		// of them but not all of them. Only once a week should something exceedingly
 		// rare show up. 8 tweets * 7 days = 56 tweets per week
@@ -60,7 +57,6 @@ public class AquariumBuilder {
 		
 		// A rare bottom dweller should show up about once every 10 tweets.
 		boolean rareBottomDwellerTime = (random.nextInt(10) == 2);
-		
 
 		// Bottom line character count should not exceed 9 characters
 		int maxLineLength = 9;
@@ -71,7 +67,7 @@ public class AquariumBuilder {
 		if (exceedinglyRareBottomTime) {
 		  bottom.add(random.oneOf(exceedinglyRareJunk));
 		}
-		int plantCount = lowFavoringRandom(maxLineLength - bottom.size(), random);
+		int plantCount = lowFavoringRandom(maxLineLength - bottom.size());
 		for (int i = 0; i < plantCount; i++) { bottom.add(random.oneOf(plants)); }
 		while (bottom.size() < maxLineLength) {
 		  bottom.add(emSpace);
@@ -79,6 +75,30 @@ public class AquariumBuilder {
 		random.shuffle(bottom);
 		String bottomLine = String.join("", bottom);
 		
-		return bottomLine;
+		// For each swimmer line, choose a random number of fish, then a random number
+		// of leading spaces for each fish.
+		List<List<String>> swimLines = new ArrayList<List<String>>();
+		//boolean buildingSwimLines = true
+		for (int s = 0; s < 5; s++) {
+		  List<String> swimLine = new ArrayList<String>();
+		  int swimmerCount = lowFavoringRandom(6);
+		  for (int i = 0; i < swimmerCount; i++) {
+		    swimLine.add(random.oneOf(fishes));
+		  }
+		  while (swimLine.size() < maxLineLength) {
+		    swimLine.add(emSpace);
+		  }
+		  random.shuffle(swimLine);
+		  swimLines.add(swimLine);
+		}
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < swimLines.size(); i++) {
+			List<String> swimLine = swimLines.get(i);
+			stringBuilder.append(String.join("", swimLine)).append("\n");
+		}
+		stringBuilder.append(bottomLine);
+		
+		return stringBuilder.toString();
 	}
 }

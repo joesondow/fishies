@@ -12,12 +12,12 @@ public class AquariumBuilderTest {
 	@Test
 	public void testBuildSimpleAquariums() {
 
-		List<Integer> values = Arrays.asList(2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
+		List<Integer> values = Arrays.asList(2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
 		Randomizer random = new TestRandomizer(values);
 		AquariumBuilder builder = new AquariumBuilder(random);
 
 		String aquarium = builder.build();
-		assertEquals("       🌿🏰", aquarium);
+		assertEquals("        🐠\n        🐡\n        🐠\n        🐡\n        🐠\n       🌿🏰", aquarium);
 	}
 
 }
