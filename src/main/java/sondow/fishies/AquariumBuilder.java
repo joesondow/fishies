@@ -12,7 +12,6 @@ public class AquariumBuilder {
 	List<String> rareBottomDwellers = Arrays.asList("🐌", "🏰", "🦀", "🐚", "⚓️", "☘️");
 	List<String> exceedinglyRareJunk = Arrays.asList("🎱", "🎲", "🎮", "🗿", "🎷",
 	    "🗽", "💎", "💰", "🔔", "💀", "💩");
-	String emQuad = "\u2003";
 	String emSpace = "\u2003";
 	
 	// Custom randomizer wrapper class allows for deterministic unit tests.
