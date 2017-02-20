@@ -1,9 +1,7 @@
 package sondow.fishies;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * A deterministic mock Randomizer for unit tests.
@@ -12,20 +10,16 @@ import java.util.Queue;
  */
 public class TestRandomizer extends Randomizer {
 
-    Queue<Integer> results = new LinkedList<Integer>();
-
-    public TestRandomizer(Iterable<Integer> values) {
-        for (Integer i : values) {
-            results.add(i);
-        }
-    }
+    boolean addOne = true;
 
     /**
      * Returns the next result that this mock randomizer is supposed to return for a given unit test.
      */
     @Override
     public int nextInt(int bound) {
-        return results.poll();
+        int result = (bound / 2) + (addOne ? 1 : 0);
+        addOne = addOne ? false : true; // toggle
+        return result;
     }
 
     /**
