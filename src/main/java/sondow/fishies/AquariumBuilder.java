@@ -29,6 +29,11 @@ public class AquariumBuilder {
         return (a < b) ? a : b;
     }
 
+    private int midFavoringRandom(int upperBound) {
+        int half = (upperBound / 2) + 1;
+        return random.nextInt(half) + random.nextInt(half);
+    }
+
     private int lowFavoringRandom(int upperBound) {
         int a = random.nextInt(upperBound);
         int b = random.nextInt(upperBound);
@@ -66,7 +71,7 @@ public class AquariumBuilder {
         if (exceedinglyRareBottomTime) {
             bottom.add(random.oneOf(exceedinglyRareJunk));
         }
-        int plantCount = lowFavoringRandom(maxLineLength - bottom.size()) + 1;
+        int plantCount = midFavoringRandom(maxLineLength - bottom.size()) + 1;
         for (int i = 0; i < plantCount; i++) {
             bottom.add(random.oneOf(plants));
         }
@@ -83,7 +88,15 @@ public class AquariumBuilder {
         // boolean buildingSwimLines = true
         for (int s = 0; s < 5; s++) {
             List<String> swimLine = new ArrayList<String>();
-            int swimmerCount = lowFavoringRandom(6);
+
+            // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
+            int maxPerLine = lowFavoringRandom(4) + 2;
+            int swimmerCount = midFavoringRandom(maxPerLine);
+
+            // At least one swimmer on first line so first lines aren't trimmed.
+            if (s == 0 && swimmerCount == 0) {
+                swimmerCount++;
+            }
             for (int i = 0; i < swimmerCount; i++) {
                 swimLine.add(random.oneOf(fishes));
             }

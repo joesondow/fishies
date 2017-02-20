@@ -11,6 +11,6 @@ public class AquariumBuilderTest {
         Randomizer random = new TestRandomizer();
         AquariumBuilder builder = new AquariumBuilder(random);
         String aquarium = builder.build();
-        assertEquals("      🐡🦑🐡\n      🦑🐡🦑\n      🐡🦑🐡\n      🦑🐡🦑\n      🐡🦑🐡\n    🌿🌾🌿🌾🌿", aquarium);
+        assertEquals("      🦑🐡🦑\n      🐡🦑🐡\n      🦑🐡🦑\n      🐡🦑🐡\n      🦑🐡🦑\n   🌾🌿🌾🌿🌾🌿", aquarium);
     }
 }
