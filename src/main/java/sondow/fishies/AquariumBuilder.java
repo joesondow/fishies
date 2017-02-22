@@ -75,7 +75,10 @@ public class AquariumBuilder {
         if (exceedinglyRareBottomTime) {
             bottom.add(random.oneOf(exceedinglyRareJunk));
         }
-        int plantCount = midFavoringRandom(maxLineLength - bottom.size() - 1) + 1;
+        int plantCount = midFavoringRandom(maxLineLength - bottom.size() - 1);
+        if (plantCount < 1) {
+            plantCount = 1;
+        }
         for (int i = 0; i < plantCount; i++) {
             bottom.add(random.oneOf(plants));
         }
