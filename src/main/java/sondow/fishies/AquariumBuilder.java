@@ -39,9 +39,23 @@ public class AquariumBuilder {
         return (a < b) ? a : b;
     }
 
-    private int midFavoringRandom(int upperBound) {
-        int half = (upperBound / 2) + 2;
-        return random.nextInt(half) + random.nextInt(half);
+    /**
+     * Rolls five dice and averages the results.
+     *
+     * @param upperBound one greater than the highest possible value
+     * @return a random number
+     */
+    int midFavoringRandom(int upperBound) {
+        int runningTotal = 0;
+        int rolls = 3;
+        for (int i = 0; i < rolls; i++) {
+            int result = random.nextInt(upperBound);
+            // System.out.println(result);
+            runningTotal += result;
+        }
+        int mean = (int) Math.round((double) runningTotal / rolls);
+        // System.out.println("runningTotal: " + runningTotal + ", rolls: " + rolls + ", mean: " + mean);
+        return mean;
     }
 
     private int lowFavoringRandom(int upperBound) {
@@ -101,7 +115,7 @@ public class AquariumBuilder {
             List<String> swimLine = new ArrayList<String>();
 
             // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
-            int maxPerLine = lowFavoringRandom(maxLineLength / 3);
+            int maxPerLine = lowFavoringRandom((int) (maxLineLength * 0.8));
             if (maxPerLine < 1) {
                 maxPerLine = 1;
             }
