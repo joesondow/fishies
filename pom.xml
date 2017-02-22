@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>sondow</groupId>
   <artifactId>lambda-twitter-fishies</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <name>lambda-twitter-fishies</name>
   <description>Uses AWS Lambda to tweet emoji aquarium pictures.</description>
   <dependencies>
