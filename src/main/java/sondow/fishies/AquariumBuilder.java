@@ -12,7 +12,12 @@ public class AquariumBuilder {
     List<String> rareBottomDwellers = Arrays.asList("🐌", "🏰", "🦀", "🐚", "⚓️", "☘️");
     List<String> exceedinglyRareJunk = Arrays.asList("🎱", "🎲", "🎮", "🗿", "🔱", "🎷", "🗽", "💎", "💰", "🔔", "💀",
             "💩");
+    String ideographicSpace = "\u3000";
+    String enSpace = "\u2002";
     String emSpace = "\u2003";
+    String threePerEmSpace = "\u2004";
+    String thinSpace = "\u2009";
+    String hairSpace = "\u200a";
 
     // Custom randomizer wrapper class allows for deterministic unit tests.
     Randomizer random;
@@ -30,7 +35,7 @@ public class AquariumBuilder {
     }
 
     private int midFavoringRandom(int upperBound) {
-        int half = (upperBound / 2) + 1;
+        int half = (upperBound / 2) + 2;
         return random.nextInt(half) + random.nextInt(half);
     }
 
@@ -52,18 +57,17 @@ public class AquariumBuilder {
             fishes.add(random.oneOf(rareSwimmers));
         }
 
-        // 140 char budget
+        // 140 standard char budget = 280 bytes. Emojis are 4 bytes each.
 
         // There will be about 8 tweets a day. Something should be special about
         // many of them but not all of them. Only once a week should something
         // exceedingly rare show up. 8 tweets * 7 days = 56 tweets per week
         boolean exceedinglyRareBottomTime = (random.nextInt(56) == 37);
 
-        // A rare bottom dweller should show up about once every 10 tweets.
-        boolean rareBottomDwellerTime = (random.nextInt(10) == 2);
+        // A rare bottom dweller should show up about once every 8 tweets.
+        boolean rareBottomDwellerTime = (random.nextInt(8) == 2);
 
-        // Bottom line character count should not exceed 9 characters
-        int maxLineLength = 9;
+        int maxLineLength = 10;
         List<String> bottom = new ArrayList<String>();
         if (rareBottomDwellerTime) {
             bottom.add(random.oneOf(rareBottomDwellers));
@@ -71,40 +75,41 @@ public class AquariumBuilder {
         if (exceedinglyRareBottomTime) {
             bottom.add(random.oneOf(exceedinglyRareJunk));
         }
-        int plantCount = midFavoringRandom(maxLineLength - bottom.size()) + 1;
+        int plantCount = midFavoringRandom(maxLineLength - bottom.size() - 1) + 1;
         for (int i = 0; i < plantCount; i++) {
             bottom.add(random.oneOf(plants));
         }
         while (bottom.size() < maxLineLength) {
-            bottom.add(emSpace);
+            bottom.add(ideographicSpace);
         }
         random.shuffle(bottom);
         String bottomLine = String.join("", bottom);
 
-        // For each swimmer line, choose a random number of fish, then a random
-        // number
-        // of leading spaces for each fish.
+        // For each swimmer line, choose a random number of fish, then random small whitespace in front of some.
+        int swimLineCount = 5;
         List<List<String>> swimLines = new ArrayList<List<String>>();
-        // boolean buildingSwimLines = true
-        for (int s = 0; s < 5; s++) {
+        int previousSwimmerCount = 0;
+        for (int s = 0; s < swimLineCount; s++) {
             List<String> swimLine = new ArrayList<String>();
 
             // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
-            int maxPerLine = lowFavoringRandom(4) + 2;
+            int maxPerLine = lowFavoringRandom(maxLineLength / 3) + 2;
             int swimmerCount = midFavoringRandom(maxPerLine);
 
             // At least one swimmer on first line so first lines aren't trimmed.
-            if (s == 0 && swimmerCount == 0) {
+            if (previousSwimmerCount == 0 && swimmerCount == 0) {
                 swimmerCount++;
             }
+
             for (int i = 0; i < swimmerCount; i++) {
-                swimLine.add(random.oneOf(fishes));
+                swimLine.add(getSmallPersonalSpace() + random.oneOf(fishes));
             }
             while (swimLine.size() < maxLineLength) {
-                swimLine.add(emSpace);
+                swimLine.add(ideographicSpace);
             }
             random.shuffle(swimLine);
             swimLines.add(swimLine);
+            previousSwimmerCount = swimmerCount;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -115,5 +120,18 @@ public class AquariumBuilder {
         stringBuilder.append(bottomLine);
 
         return stringBuilder.toString();
+    }
+
+    private String getSmallPersonalSpace() {
+        int jitter = random.nextInt(4);
+        String personalSpace = "";
+        if (jitter == 1) {
+            personalSpace = thinSpace;
+        } else if (jitter == 2) {
+            personalSpace = threePerEmSpace;
+        } else if (jitter == 3) {
+            personalSpace = enSpace;
+        }
+        return personalSpace;
     }
 }
