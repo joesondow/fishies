@@ -101,7 +101,10 @@ public class AquariumBuilder {
             List<String> swimLine = new ArrayList<String>();
 
             // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
-            int maxPerLine = lowFavoringRandom(maxLineLength / 3) + 2;
+            int maxPerLine = lowFavoringRandom(maxLineLength / 3);
+            if (maxPerLine < 1) {
+                maxPerLine = 1;
+            }
             int swimmerCount = midFavoringRandom(maxPerLine);
 
             // At least one swimmer on first line so first lines aren't trimmed.
