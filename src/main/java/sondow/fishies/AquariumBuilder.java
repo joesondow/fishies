@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Logic for making a semi-random emoji aquarium string.
+ *
+ * @author @JoeSondow
+ */
 public class AquariumBuilder {
 
     List<String> fishTypes = Arrays.asList("🐟", "🐡", "🐠");
