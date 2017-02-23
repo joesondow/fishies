@@ -23,26 +23,43 @@ public class LambdaRequestHandler implements RequestHandler<Object, Object> {
         AquariumBuilder builder = new AquariumBuilder();
 
         // AWS Lambda only allows underscores in environment variables, not dots, so the default ways twitter4j
-        // finds keys aren't
-        // possible. Instead, write your own code that gets the configuration either from Lambda-friendly
-        // environment variables
-        // or from a default twitter4j.properties file at the project root, or on the classpath, or in WEB-INF.
+        // finds keys aren't possible. Instead, write your own code that gets the configuration either from
+        // Lambda-friendly environment variables. If those variables are missing, default to using the regular
+        // twitter4j algorithm of getting keys from a default twitter4j.properties file at the project root,
+        // or on the classpath, or in WEB-INF.
         ConfigurationBuilder cb = new ConfigurationBuilder();
-        String consumerKeyEnvVar = System.getenv("twitter4j_oauth_consumerKey");
-        String consumerSecretEnvVar = System.getenv("twitter4j_oauth_consumerSecret");
-        String accessTokenEnvVar = System.getenv("twitter4j_oauth_accessToken");
-        String accessTokenSecretEnvVar = System.getenv("twitter4j_oauth_accessTokenSecret");
-        if (consumerKeyEnvVar != null) {
-            cb.setOAuthConsumerKey(consumerKeyEnvVar);
+
+        // If just one set of keys is provided in environment variables, use that key set.
+        String consumerKey = System.getenv("twitter4j_oauth_consumerKey");
+        String consumerSecret = System.getenv("twitter4j_oauth_consumerSecret");
+        String accessToken = System.getenv("twitter4j_oauth_accessToken");
+        String accessTokenSecret = System.getenv("twitter4j_oauth_accessTokenSecret");
+
+        // Override with a specific account if available. This mechanism allows us to provide multiple key sets
+        // in the AWS Lambda configuration, and switch which Twitter account to target by retyping just the
+        // account name in the configuration.
+        String account = System.getenv("twitter_account");
+        if (account != null) {
+            String specificConsumerKey = System.getenv(account + "_twitter4j_oauth_consumerKey");
+            consumerKey = (specificConsumerKey != null) ? specificConsumerKey : consumerKey;
+            String specificConsumerSecret = System.getenv(account + "_twitter4j_oauth_consumerSecret");
+            consumerSecret = (specificConsumerSecret != null) ? specificConsumerSecret : consumerSecret;
+            String specificAccessToken = System.getenv(account + "_twitter4j_oauth_accessToken");
+            accessToken = (specificAccessToken != null) ? specificAccessToken : accessToken;
+            String specificAccTokSecret = System.getenv(account + "_twitter4j_oauth_accessTokenSecret");
+            accessTokenSecret = (specificAccTokSecret != null) ? specificAccTokSecret : accessTokenSecret;
         }
-        if (consumerSecretEnvVar != null) {
-            cb.setOAuthConsumerSecret(consumerSecretEnvVar);
+        if (consumerKey != null) {
+            cb.setOAuthConsumerKey(consumerKey);
         }
-        if (accessTokenEnvVar != null) {
-            cb.setOAuthAccessToken(accessTokenEnvVar);
+        if (consumerSecret != null) {
+            cb.setOAuthConsumerSecret(consumerSecret);
         }
-        if (accessTokenSecretEnvVar != null) {
-            cb.setOAuthAccessTokenSecret(accessTokenSecretEnvVar);
+        if (accessToken != null) {
+            cb.setOAuthAccessToken(accessToken);
+        }
+        if (accessTokenSecret != null) {
+            cb.setOAuthAccessTokenSecret(accessTokenSecret);
         }
         Configuration config = cb.build();
 
