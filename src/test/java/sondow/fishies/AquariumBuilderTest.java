@@ -8,11 +8,11 @@ public class AquariumBuilderTest {
 
     @Test
     public void testBuildSimpleAquarium() {
-        Randomizer random = new TestRandomizer(TestRandomizer.Setting.HALF_OR_HALF_PLUS_ONE);
+        Randomizer random = new TestRandomizer(TestRandomizer.Setting.QUARTER_MAX_HALF_MIN);
         AquariumBuilder builder = new AquariumBuilder(random);
         String actual = builder.build();
-        String expected = "　　　　　　　 🦑 🦑 🦑\n" + "　　　　　　　　 🐡 🐡\n" + "　　　　　　　 🦑 🦑 🦑\n" + "　　　　　　　　 🐡 🐡\n"
-                + "　　　　　　　 🦑 🦑 🦑\n" + "　　　　　🌾🌿🌾🌿🌾";
+        String expected = "　　　　　　　　　🐠\n" + "　　　　　　　　　 🐠\n" + "　　　　　　　　　　\n" + "　　　　　　　　　🐠\n" + "　　　　　　　　　 🐠\n"
+                + "　　　　　　　🌾🌿☘️";
         assertEquals(expected, actual);
     }
 

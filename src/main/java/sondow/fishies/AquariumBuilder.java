@@ -44,7 +44,7 @@ public class AquariumBuilder {
         return mean;
     }
 
-    private int lowFavoringRandom(int upperBound) {
+    int lowFavoringRandom(int upperBound) {
         int a = random.nextInt(upperBound);
         int b = random.nextInt(upperBound);
         return lower(a, b);
@@ -53,8 +53,15 @@ public class AquariumBuilder {
     public String build() {
         List<String> fishes = new ArrayList<String>();
         int fishTypeCount = random.nextInt(Chars.FISH_TYPES.size()) + 1;
-        for (int i = 1; i <= fishTypeCount; i++) {
-            fishes.add(random.oneOf(Chars.FISH_TYPES));
+        if (fishTypeCount == Chars.FISH_TYPES.size()) {
+            fishes.addAll(Chars.FISH_TYPES);
+        } else {
+            while (fishes.size() < fishTypeCount) {
+                String fishType = random.oneOf(Chars.FISH_TYPES);
+                if (!fishes.contains(fishType)) {
+                    fishes.add(fishType);
+                }
+            }
         }
 
         // A rare swimmer should show up about once every 8 tweets.
@@ -101,10 +108,7 @@ public class AquariumBuilder {
             List<String> swimLine = new ArrayList<String>();
 
             // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
-            int maxPerLine = lowFavoringRandom((int) (maxLineLength * 0.8));
-            if (maxPerLine < 1) {
-                maxPerLine = 1;
-            }
+            int maxPerLine = random.nextInt((int) Math.round((maxLineLength * 0.6))) + 1;
             int swimmerCount = midFavoringRandom(maxPerLine);
 
             // At least one swimmer on first line so first lines aren't trimmed.
