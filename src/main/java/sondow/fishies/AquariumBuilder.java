@@ -1,7 +1,6 @@
 package sondow.fishies;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,19 +9,6 @@ import java.util.List;
  * @author @JoeSondow
  */
 public class AquariumBuilder {
-
-    List<String> fishTypes = Arrays.asList("🐟", "🐡", "🐠");
-    List<String> rareSwimmers = Arrays.asList("🐙", "🐬", "🦑", "🦈");
-    List<String> plants = Arrays.asList("🌱", "🌾", "🌿");
-    List<String> rareBottomDwellers = Arrays.asList("🐌", "🏰", "🦀", "🐚", "⚓️", "☘️");
-    List<String> exceedinglyRareJunk = Arrays.asList("🎱", "🎲", "🎮", "🗿", "🔱", "🎷", "🗽", "💎", "💰", "🔔", "💀",
-            "💩");
-    String ideographicSpace = "\u3000";
-    String enSpace = "\u2002";
-    String emSpace = "\u2003";
-    String threePerEmSpace = "\u2004";
-    String thinSpace = "\u2009";
-    String hairSpace = "\u200a";
 
     // Custom randomizer wrapper class allows for deterministic unit tests.
     Randomizer random;
@@ -66,14 +52,14 @@ public class AquariumBuilder {
 
     public String build() {
         List<String> fishes = new ArrayList<String>();
-        int fishTypeCount = random.nextInt(fishTypes.size()) + 1;
+        int fishTypeCount = random.nextInt(Chars.FISH_TYPES.size()) + 1;
         for (int i = 1; i <= fishTypeCount; i++) {
-            fishes.add(random.oneOf(fishTypes));
+            fishes.add(random.oneOf(Chars.FISH_TYPES));
         }
 
         // A rare swimmer should show up about once every 8 tweets.
         if (random.nextInt(8) == 5) {
-            fishes.add(random.oneOf(rareSwimmers));
+            fishes.add(random.oneOf(Chars.RARE_SWIMMER_TYPES));
         }
 
         // 140 standard char budget = 280 bytes. Emojis are 4 bytes each.
@@ -89,20 +75,20 @@ public class AquariumBuilder {
         int maxLineLength = 10;
         List<String> bottom = new ArrayList<String>();
         if (rareBottomDwellerTime) {
-            bottom.add(random.oneOf(rareBottomDwellers));
+            bottom.add(random.oneOf(Chars.RARE_BOTTOM_DWELLERS));
         }
         if (exceedinglyRareBottomTime) {
-            bottom.add(random.oneOf(exceedinglyRareJunk));
+            bottom.add(random.oneOf(Chars.EXCEEDINGLY_RARE_JUNK));
         }
         int plantCount = midFavoringRandom(maxLineLength - bottom.size() - 1);
         if (plantCount < 1) {
             plantCount = 1;
         }
         for (int i = 0; i < plantCount; i++) {
-            bottom.add(random.oneOf(plants));
+            bottom.add(random.oneOf(Chars.PLANT_TYPES));
         }
         while (bottom.size() < maxLineLength) {
-            bottom.add(ideographicSpace);
+            bottom.add(Chars.IDEOGRAPHIC_SPACE);
         }
         random.shuffle(bottom);
         String bottomLine = String.join("", bottom);
@@ -130,7 +116,7 @@ public class AquariumBuilder {
                 swimLine.add(getSmallPersonalSpace() + random.oneOf(fishes));
             }
             while (swimLine.size() < maxLineLength) {
-                swimLine.add(ideographicSpace);
+                swimLine.add(Chars.IDEOGRAPHIC_SPACE);
             }
             random.shuffle(swimLine);
             swimLines.add(swimLine);
@@ -151,11 +137,11 @@ public class AquariumBuilder {
         int jitter = random.nextInt(4);
         String personalSpace = "";
         if (jitter == 1) {
-            personalSpace = thinSpace;
+            personalSpace = Chars.THIN_SPACE;
         } else if (jitter == 2) {
-            personalSpace = threePerEmSpace;
+            personalSpace = Chars.THREE_PER_EM_SPACE;
         } else if (jitter == 3) {
-            personalSpace = enSpace;
+            personalSpace = Chars.EN_SPACE;
         }
         return personalSpace;
     }
