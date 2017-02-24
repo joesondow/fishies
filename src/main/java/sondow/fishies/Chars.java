@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This is where we keep the cast of characters.
+ * The cast of characters.
  *
  * @author @JoeSondow
  */

@@ -10,7 +10,9 @@ import java.util.List;
  */
 public class AquariumBuilder {
 
-    // Custom randomizer wrapper class allows for deterministic unit tests.
+    /**
+     * Custom randomizer wrapper class allows for deterministic unit tests.
+     */
     Randomizer random;
 
     AquariumBuilder() {
@@ -50,6 +52,9 @@ public class AquariumBuilder {
         return lower(a, b);
     }
 
+    /**
+     * Builds a semi-random new aquarium string.
+     */
     public String build() {
         List<String> fishes = new ArrayList<String>();
         int fishTypeCount = random.nextInt(Chars.FISH_TYPES.size()) + 1;
@@ -68,8 +73,6 @@ public class AquariumBuilder {
         if (random.nextInt(8) == 5) {
             fishes.add(random.oneOf(Chars.RARE_SWIMMER_TYPES));
         }
-
-        // 140 standard char budget = 280 bytes. Emojis are 4 bytes each.
 
         // There will be about 8 tweets a day. Something should be special about
         // many of them but not all of them. Only once a week should something
