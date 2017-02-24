@@ -12,7 +12,7 @@ public class Tweeter {
     private Configuration config;
 
     public Tweeter() {
-        this(new ConfigurationBuilder().build());
+        this(new ConfigurationBuilder().setTrimUserEnabled(true).build());
     }
 
     public Tweeter(Configuration config) {
