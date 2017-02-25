@@ -5,15 +5,10 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.Configuration;
-import twitter4j.conf.ConfigurationBuilder;
 
 public class Tweeter {
 
     private Configuration config;
-
-    public Tweeter() {
-        this(new ConfigurationBuilder().setTrimUserEnabled(true).build());
-    }
 
     public Tweeter(Configuration config) {
         this.config = config;

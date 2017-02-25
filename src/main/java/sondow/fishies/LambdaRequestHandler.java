@@ -61,7 +61,7 @@ public class LambdaRequestHandler implements RequestHandler<Object, Object> {
         if (accessTokenSecret != null) {
             cb.setOAuthAccessTokenSecret(accessTokenSecret);
         }
-        Configuration config = cb.build();
+        Configuration config = cb.setTrimUserEnabled(true).build();
 
         Tweeter tweeter = new Tweeter(config);
         return tweeter.tweet(builder.build());

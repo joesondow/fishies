@@ -2,3 +2,4 @@ target
 .DS_Store
 .settings
 twitter4j.properties
+*.twitter4j.properties
