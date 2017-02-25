@@ -1,6 +1,7 @@
 package sondow.fishies;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -55,13 +56,33 @@ public class AquariumBuilderTest {
 
     @Test()
     public void testLotsOfRandomOnesToSeeHowTheyLook() {
+        boolean dolphinFound = false;
+        boolean sharkFound = false;
+        boolean squidFound = false;
+        boolean octopusFound = false;
         for (int i = 0; i < 100; i++) {
             System.out.println("-------------------------");
             String aquarium = new AquariumBuilder().build();
+            if (aquarium.contains("🐬")) {
+                dolphinFound = true;
+            }
+            if (aquarium.contains("🦈")) {
+                sharkFound = true;
+            }
+            if (aquarium.contains("🦑")) {
+                squidFound = true;
+            }
+            if (aquarium.contains("🐙")) {
+                octopusFound = true;
+            }
             System.out.println(aquarium);
             int length = aquarium.length();
             assert (length < 140);
             System.out.println("length: " + length);
         }
+        assertTrue("Missing dolphins 🐬", dolphinFound);
+        assertTrue("Missing sharks 🦈", sharkFound);
+        assertTrue("Missing squid 🦑", squidFound);
+        assertTrue("Missing ocotopuses 🐙", octopusFound);
     }
 }
