@@ -54,18 +54,11 @@ public class AquariumBuilder {
      * Builds a semi-random new aquarium string.
      */
     public String build() {
-        List<String> fishes = new ArrayList<String>();
-        int fishTypeCount = random.nextInt(Chars.FISH_TYPES.size()) + 1;
-        if (fishTypeCount == Chars.FISH_TYPES.size()) {
-            fishes.addAll(Chars.FISH_TYPES);
-        } else {
-            while (fishes.size() < fishTypeCount) {
-                String fishType = random.oneOf(Chars.FISH_TYPES);
-                if (!fishes.contains(fishType)) {
-                    fishes.add(fishType);
-                }
-            }
-        }
+
+        Types types = new Types(random);
+        types.chooseTypes();
+
+        List<String> fishes = types.fishTypes;
 
         // A rare swimmer should show up about once every 8 tweets.
         if (random.nextInt(8) == 5) {
