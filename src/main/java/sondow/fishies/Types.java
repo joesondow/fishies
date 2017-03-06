@@ -34,12 +34,12 @@ public class Types {
                 }
             }
         }
-        //
-        // // A rare swimmer should show up about once every 8 tweets.
-        // if (random.nextInt(8) == 5) {
-        // rareSwimmerTypes.add(random.oneOf(Chars.RARE_SWIMMER_TYPES));
-        // }
-        //
+
+        // A rare swimmer should show up about once every 8 tweets.
+        if (random.nextInt(8) == 5) {
+            fishTypes.add(random.oneOf(Chars.RARE_SWIMMER_TYPES));
+        }
+
         // // A rare bottom dweller should show up about once every 8 tweets.
         // boolean rareBottomDwellerTime = (random.nextInt(8) == 2);
         // if (rareBottomDwellerTime) {

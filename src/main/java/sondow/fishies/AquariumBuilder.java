@@ -60,11 +60,6 @@ public class AquariumBuilder {
 
         List<String> fishes = types.fishTypes;
 
-        // A rare swimmer should show up about once every 8 tweets.
-        if (random.nextInt(8) == 5) {
-            fishes.add(random.oneOf(Chars.RARE_SWIMMER_TYPES));
-        }
-
         // There will be about 8 tweets a day. Something should be special about
         // many of them but not all of them. Only once a week should something
         // exceedingly rare show up. 8 tweets * 7 days = 56 tweets per week
