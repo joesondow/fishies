@@ -64,14 +64,14 @@ public class AquariumBuilder {
         // // many of them but not all of them. Only once a week should something
         // // exceedingly rare show up. 8 tweets * 7 days = 56 tweets per week
         // boolean exceedinglyRareBottomTime = (random.nextInt(56) == 37);
-
-        // A rare bottom dweller should show up about once every 8 tweets.
-        boolean rareBottomDwellerTime = (random.nextInt(8) == 2);
+        //
+        // // A rare bottom dweller should show up about once every 8 tweets.
+        // boolean rareBottomDwellerTime = (random.nextInt(8) == 2);
 
         int maxLineLength = 10;
         List<String> bottom = new ArrayList<String>();
-        if (rareBottomDwellerTime) {
-            bottom.add(random.oneOf(Chars.RARE_BOTTOM_DWELLERS));
+        if (types.rareBottomDwellerTypes.size() >= 1) {
+            bottom.add(types.rareBottomDwellerTypes.get(0));
         }
         if (types.exceedinglyRareBottomDwellerTypes.size() >= 1) {
             bottom.add(types.exceedinglyRareBottomDwellerTypes.get(0));
