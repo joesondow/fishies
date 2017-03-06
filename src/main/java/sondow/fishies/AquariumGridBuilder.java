@@ -76,7 +76,7 @@ public class AquariumGridBuilder {
 
             // Which swimmer?
             String swimmerType = random.oneOf(types.fishTypes);
-            grid.put(row, col, swimmerType);
+            grid.put(row, col, Chars.getSmallPersonalSpace(random) + swimmerType);
         }
 
         // System.out.println("plant count: " + plantCount);
