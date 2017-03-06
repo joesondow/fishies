@@ -1,5 +1,7 @@
 package sondow.fishies;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -17,8 +19,14 @@ public class Randomizer {
         return random.nextInt(bound);
     }
 
-    public <T> T oneOf(List<T> things) {
-        return things.get(nextInt(things.size()));
+    public <T> T oneOf(Collection<T> things) {
+        List<T> list;
+        if (things instanceof List) {
+            list = (List<T>) things;
+        } else {
+            list = new ArrayList<T>(things);
+        }
+        return list.get(nextInt(list.size()));
     }
 
     public void shuffle(List<String> list) {
