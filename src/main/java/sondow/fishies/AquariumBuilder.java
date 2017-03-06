@@ -101,7 +101,7 @@ public class AquariumBuilder {
             }
 
             for (int i = 0; i < swimmerCount; i++) {
-                swimLine.add(getSmallPersonalSpace() + random.oneOf(fishes));
+                swimLine.add(Chars.getSmallPersonalSpace(random) + random.oneOf(fishes));
             }
             while (swimLine.size() < maxLineLength) {
                 swimLine.add(Chars.IDEOGRAPHIC_SPACE);
@@ -119,18 +119,5 @@ public class AquariumBuilder {
         stringBuilder.append(bottomLine);
 
         return stringBuilder.toString();
-    }
-
-    private String getSmallPersonalSpace() {
-        int jitter = random.nextInt(4);
-        String personalSpace = "";
-        if (jitter == 1) {
-            personalSpace = Chars.THIN_SPACE;
-        } else if (jitter == 2) {
-            personalSpace = Chars.THREE_PER_EM_SPACE;
-        } else if (jitter == 3) {
-            personalSpace = Chars.EN_SPACE;
-        }
-        return personalSpace;
     }
 }

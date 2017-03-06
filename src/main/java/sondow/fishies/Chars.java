@@ -23,4 +23,17 @@ public class Chars {
     public static final String THREE_PER_EM_SPACE = "\u2004";
     public static final String THIN_SPACE = "\u2009";
     public static final String HAIR_SPACE = "\u200a";
+
+    public static String getSmallPersonalSpace(Randomizer random) {
+        int jitter = random.nextInt(4);
+        String personalSpace = "";
+        if (jitter == 1) {
+            personalSpace = Chars.THIN_SPACE;
+        } else if (jitter == 2) {
+            personalSpace = Chars.THREE_PER_EM_SPACE;
+        } else if (jitter == 3) {
+            personalSpace = Chars.EN_SPACE;
+        }
+        return personalSpace;
+    }
 }
