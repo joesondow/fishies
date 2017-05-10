@@ -30,23 +30,23 @@ public class LambdaRequestHandler implements RequestHandler<Object, Object> {
         ConfigurationBuilder cb = new ConfigurationBuilder();
 
         // If just one set of keys is provided in environment variables, use that key set.
-        String consumerKey = System.getenv("twitter4j_oauth_consumerKey");
-        String consumerSecret = System.getenv("twitter4j_oauth_consumerSecret");
-        String accessToken = System.getenv("twitter4j_oauth_accessToken");
-        String accessTokenSecret = System.getenv("twitter4j_oauth_accessTokenSecret");
+        String consumerKey = Environment.get("twitter4j_oauth_consumerKey");
+        String consumerSecret = Environment.get("twitter4j_oauth_consumerSecret");
+        String accessToken = Environment.get("twitter4j_oauth_accessToken");
+        String accessTokenSecret = Environment.get("twitter4j_oauth_accessTokenSecret");
 
         // Override with a specific account if available. This mechanism allows us to provide multiple key sets
         // in the AWS Lambda configuration, and switch which Twitter account to target by retyping just the
         // account name in the configuration.
-        String account = System.getenv("twitter_account");
+        String account = Environment.get("twitter_account");
         if (account != null) {
-            String specificConsumerKey = System.getenv(account + "_twitter4j_oauth_consumerKey");
+            String specificConsumerKey = Environment.get(account + "_twitter4j_oauth_consumerKey");
             consumerKey = (specificConsumerKey != null) ? specificConsumerKey : consumerKey;
-            String specificConsumerSecret = System.getenv(account + "_twitter4j_oauth_consumerSecret");
+            String specificConsumerSecret = Environment.get(account + "_twitter4j_oauth_consumerSecret");
             consumerSecret = (specificConsumerSecret != null) ? specificConsumerSecret : consumerSecret;
-            String specificAccessToken = System.getenv(account + "_twitter4j_oauth_accessToken");
+            String specificAccessToken = Environment.get(account + "_twitter4j_oauth_accessToken");
             accessToken = (specificAccessToken != null) ? specificAccessToken : accessToken;
-            String specificAccTokSecret = System.getenv(account + "_twitter4j_oauth_accessTokenSecret");
+            String specificAccTokSecret = Environment.get(account + "_twitter4j_oauth_accessTokenSecret");
             accessTokenSecret = (specificAccTokSecret != null) ? specificAccTokSecret : accessTokenSecret;
         }
         if (consumerKey != null) {
