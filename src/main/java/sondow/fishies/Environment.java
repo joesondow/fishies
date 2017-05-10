@@ -4,7 +4,6 @@ package sondow.fishies;
  * AWS has an encryption bug right now in their free tier services right now. See
  * https://twitter.com/JoeSondow/status/856638770182881280
  *
- *
  * The main reason I would like to encrypt some secret values set in environment variables so that I can live
  * stream some coding and show the web page where I'm doing the deployment without accidentally broadcasting the
  * secret values in the environment variables. Since the AWS lambda page only shows about the first 20 characters
