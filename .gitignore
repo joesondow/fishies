@@ -3,3 +3,4 @@ target
 .settings
 twitter4j.properties
 *.twitter4j.properties
+/bin/
