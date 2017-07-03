@@ -1,3 +1,13 @@
+// Repositories to use for fetching build dependencies (not application dependencies)
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 group = 'sondow'
@@ -12,7 +22,7 @@ Gradle version: ${gradle.gradleVersion}
 """
 
 
-
+// Repositories to use for fetching application dependencies (not build dependencies)
 repositories {
     jcenter()
 }
