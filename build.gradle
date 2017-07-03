@@ -9,6 +9,7 @@ buildscript {
 }
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
+apply plugin: "groovy"
 
 group = 'sondow'
 version = '1.3.7'
@@ -33,4 +34,13 @@ dependencies {
     
     // Allows setting environment variables in unit tests
     testCompile group: 'com.github.stefanbirkner', name: 'system-rules', version:'1.16.0'
+    
+    // Mandatory dependencies for using Spock
+    testCompile "org.codehaus.groovy:groovy-all:2.4.10"
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+
+    // Optional dependencies for using Spock
+    testCompile "org.hamcrest:hamcrest-core:1.3" // only necessary if Hamcrest matchers are used
+    testRuntime "net.bytebuddy:byte-buddy:1.6.5" // allows mocking of classes (in addition to interfaces)
+    testRuntime "org.objenesis:objenesis:2.5.1"  // allows mocking of classes without default constructor (together with CGLIB)
 }
