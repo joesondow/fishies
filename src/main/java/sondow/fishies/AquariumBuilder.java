@@ -38,11 +38,9 @@ public class AquariumBuilder {
         int rolls = 3;
         for (int i = 0; i < rolls; i++) {
             int result = random.nextInt(upperBound);
-            // System.out.println(result);
             runningTotal += result;
         }
         int mean = (int) Math.round((double) runningTotal / rolls);
-        // System.out.println("runningTotal: " + runningTotal + ", rolls: " + rolls + ", mean: " + mean);
         return mean;
     }
 
