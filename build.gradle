@@ -4,7 +4,13 @@ apply plugin: 'maven'
 group = 'sondow'
 version = '1.3.7'
 
-description = """lambda-twitter-fishies"""
+description = """\
+Uses AWS Lambda to tweet emoji aquarium pictures.
+------------------------------------------
+Project version: ${version}
+Gradle version: ${gradle.gradleVersion}
+------------------------------------------
+"""
 
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
