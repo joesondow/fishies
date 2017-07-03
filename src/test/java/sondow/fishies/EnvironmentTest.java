@@ -11,7 +11,7 @@ import org.junit.contrib.java.lang.system.EnvironmentVariables;
 public class EnvironmentTest {
 
     @Rule
-    public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
+    public final EnvironmentVariables envVars = new EnvironmentVariables();
 
     @Before
     public void setUp() throws Exception {
@@ -23,8 +23,8 @@ public class EnvironmentTest {
 
     @Test
     public final void testGet() {
-        environmentVariables.set("twitter_access_id", "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZmoondoggy");
-        environmentVariables.set("twitter_handle", "SchoolsOfFish");
+        envVars.set("twitter_access_id", "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZmoondoggy");
+        envVars.set("twitter_handle", "SchoolsOfFish");
         assertEquals("moondoggy", Environment.get("twitter_access_id"));
         assertEquals("SchoolsOfFish", Environment.get("twitter_handle"));
     }

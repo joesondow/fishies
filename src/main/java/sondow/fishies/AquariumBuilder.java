@@ -101,14 +101,16 @@ public class AquariumBuilder {
         random.shuffle(bottom);
         String bottomLine = String.join("", bottom);
 
-        // For each swimmer line, choose a random number of fish, then random small whitespace in front of some.
+        // For each swimmer line, choose a random number of fish, then random small whitespace
+        // in front of some.
         int swimLineCount = 5;
         List<List<String>> swimLines = new ArrayList<List<String>>();
         int previousSwimmerCount = 0;
         for (int s = 0; s < swimLineCount; s++) {
             List<String> swimLine = new ArrayList<String>();
 
-            // Lines should tend to have similar swimmer densities. How crowded in general is this aquarium?
+            // Lines should tend to have similar swimmer densities. How crowded in general is
+            // this aquarium?
             int maxPerLine = random.nextInt((int) Math.round((maxLineLength * 0.6))) + 1;
             int swimmerCount = midFavoringRandom(maxPerLine);
 

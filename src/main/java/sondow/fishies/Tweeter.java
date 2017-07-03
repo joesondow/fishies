@@ -18,7 +18,8 @@ public class Tweeter {
         Twitter twitter = new TwitterFactory(config).getInstance();
         try {
             Status status = twitter.updateStatus(message);
-            System.out.println("Successfully tweeted message: " + message + " with status " + status);
+            String msg = "Successfully tweeted message: " + message + " with status " + status;
+            System.out.println(msg);
             return status;
         } catch (TwitterException e) {
             e.printStackTrace();

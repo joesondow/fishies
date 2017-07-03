@@ -26,7 +26,8 @@ public class TestRandomizer extends Randomizer {
     }
 
     /**
-     * Returns the next result that this mock randomizer is supposed to return for a given unit test.
+     * Returns the next result that this mock randomizer is supposed to return for a given
+     * unit test.
      */
     @Override
     public int nextInt(int bound) {
@@ -60,12 +61,13 @@ public class TestRandomizer extends Randomizer {
                 return 0;
             }
         }
-        throw new RuntimeException(
-                "TestRandomizer problem. Setting: " + setting + ", bound: " + bound + ", phase: " + phase);
+        throw new RuntimeException("TestRandomizer problem. Setting: " + setting + ", bound: "
+                + bound + ", phase: " + phase);
     }
 
     /**
-     * Mock implementation of shuffle just reverses the list, so it's altered but the order is deterministic.
+     * Mock implementation of shuffle just reverses the list, so it's altered but the order is
+     * deterministic.
      */
     @Override
     public void shuffle(List<String> list) {

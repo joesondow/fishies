@@ -12,8 +12,8 @@ public class AquariumBuilderTest {
         Randomizer random = new TestRandomizer(TestRandomizer.Setting.QUARTER_MAX_HALF_MIN);
         AquariumBuilder builder = new AquariumBuilder(random);
         String actual = builder.build();
-        String expected = "　　　　　　　　　🐠\n" + "　　　　　　　　　 🐠\n" + "　　　　　　　　　　\n" + "　　　　　　　　　🐠\n" + "　　　　　　　　　 🐠\n"
-                + "　　　　　　　🌾🌿☘️";
+        String expected = "　　　　　　　　　🐠\n" + "　　　　　　　　　 🐠\n" + "　　　　　　　　　　\n" + "　　　　　　　　　🐠\n"
+                + "　　　　　　　　　 🐠\n" + "　　　　　　　🌾🌿☘️";
         assertEquals(expected, actual);
     }
 

@@ -13,9 +13,10 @@ public class Chars {
     public static final List<String> FISH_TYPES = Arrays.asList("🐟", "🐡", "🐠");
     public static final List<String> RARE_SWIMMER_TYPES = Arrays.asList("🐙", "🐬", "🦑", "🦈");
     public static final List<String> PLANT_TYPES = Arrays.asList("🌱", "🌾", "🌿");
-    public static final List<String> RARE_BOTTOM_DWELLERS = Arrays.asList("🐌", "🏰", "🦀", "🐚", "⚓️", "☘️");
-    public static final List<String> EXCEEDINGLY_RARE_JUNK = Arrays.asList("🎱", "🎲", "🎮", "🗿", "🔱", "🎷", "🗽",
-            "💎", "💰", "🔔", "💀", "💩");
+    public static final List<String> RARE_BOTTOM_DWELLERS = Arrays.asList("🐌", "🏰", "🦀", "🐚",
+            "⚓️", "☘️");
+    public static final List<String> EXCEEDINGLY_RARE_JUNK = Arrays.asList("🎱", "🎲", "🎮", "🗿",
+            "🔱", "🎷", "🗽", "💎", "💰", "🔔", "💀", "💩");
     public static final String IDEOGRAPHIC_SPACE = "\u3000";
     public static final String EN_SPACE = "\u2002";
     public static final String EM_SPACE = "\u2003";
